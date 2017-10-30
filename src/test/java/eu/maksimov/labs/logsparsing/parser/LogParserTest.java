@@ -1,15 +1,17 @@
 package eu.maksimov.labs.logsparsing.parser;
 
+import eu.maksimov.labs.logsparsing.model.Entry;
+import eu.maksimov.labs.logsparsing.model.ResourceEntry;
+import eu.maksimov.labs.logsparsing.model.UriEntry;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Collection;
-import java.util.Set;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-import eu.maksimov.labs.logsparsing.model.Entry;
-import eu.maksimov.labs.logsparsing.model.ResourceEntry;
-import eu.maksimov.labs.logsparsing.model.UriEntry;
+import java.util.List;
+
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,7 +41,7 @@ class LogParserTest {
     Path inputLogFile = Paths.get(getClass().getClassLoader().getResource("simple.log").toURI());
 
     // when
-    Set<Entry> result = parser.parse(inputLogFile);
+    List<Entry> result = parser.parse(inputLogFile);
 
     // then
     assertThat(result).containsOnly(
@@ -59,7 +61,7 @@ class LogParserTest {
     Path inputLogFile = Paths.get(getClass().getClassLoader().getResource("timing.log").toURI());
 
     // when
-    Set<Entry> result = parser.parse(inputLogFile);
+    List<Entry> result = parser.parse(inputLogFile);
 
     // then
     assertThat(result).hasSize(1001);

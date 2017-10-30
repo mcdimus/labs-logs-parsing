@@ -1,14 +1,15 @@
 package eu.maksimov.labs.logsparsing.parser;
 
+import eu.maksimov.labs.logsparsing.model.Entry;
+import eu.maksimov.labs.logsparsing.parser.entry.EntryParser;
+import eu.maksimov.labs.logsparsing.parser.entry.EntryParserFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import eu.maksimov.labs.logsparsing.model.Entry;
-import eu.maksimov.labs.logsparsing.parser.entry.EntryParser;
-import eu.maksimov.labs.logsparsing.parser.entry.EntryParserFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Dmitri Maksimov
@@ -16,9 +17,9 @@ import eu.maksimov.labs.logsparsing.parser.entry.EntryParserFactory;
 public class BufferedReaderLogParser implements LogParser {
 
   @Override
-  public Set<Entry> parse(Path logFile) {
+  public List<Entry> parse(Path logFile) {
     EntryParser entryParser = new EntryParserFactory().getInstance();
-    Set<Entry> entries = new LinkedHashSet<>();
+    List<Entry> entries = new ArrayList<>();
 
     try (BufferedReader br = Files.newBufferedReader(logFile)) {
       String line;

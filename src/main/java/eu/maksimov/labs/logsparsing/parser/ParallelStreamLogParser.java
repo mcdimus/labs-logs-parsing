@@ -1,15 +1,16 @@
 package eu.maksimov.labs.logsparsing.parser;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.stream.Stream;
 import eu.maksimov.labs.logsparsing.model.Entry;
 import eu.maksimov.labs.logsparsing.parser.entry.EntryParser;
 import eu.maksimov.labs.logsparsing.parser.entry.EntryParserFactory;
-import static java.util.stream.Collectors.toCollection;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Dmitri Maksimov
@@ -17,14 +18,14 @@ import static java.util.stream.Collectors.toCollection;
 public class ParallelStreamLogParser implements LogParser {
 
   @Override
-  public Set<Entry> parse(Path logFile) {
+  public List<Entry> parse(Path logFile) {
     EntryParser entryParser = new EntryParserFactory().getInstance();
 
     try (Stream<String> lines = Files.lines(logFile)) {
       return lines
           .parallel()
           .map(entryParser::parse)
-          .collect(toCollection(LinkedHashSet::new));
+              .collect(toList());
     } catch (IOException e) {
       throw new IllegalStateException();
     }

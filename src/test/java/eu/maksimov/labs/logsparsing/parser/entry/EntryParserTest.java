@@ -1,16 +1,14 @@
-package eu.maksimov.labs.logsparsing.parser;
+package eu.maksimov.labs.logsparsing.parser.entry;
 
-import java.util.Collection;
-import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import eu.maksimov.labs.logsparsing.model.Entry;
 import eu.maksimov.labs.logsparsing.model.ResourceEntry;
 import eu.maksimov.labs.logsparsing.model.UriEntry;
-import eu.maksimov.labs.logsparsing.parser.entry.EntryParser;
-import eu.maksimov.labs.logsparsing.parser.entry.IndexOfEntryParser;
-import eu.maksimov.labs.logsparsing.parser.entry.RegExpEntryParser;
-import eu.maksimov.labs.logsparsing.parser.entry.SplitEntryParser;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Collection;
+
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
